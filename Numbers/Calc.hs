@@ -35,7 +35,7 @@ data Tok = Open | Close | Word String
          deriving (Eq, Ord, Show)
 
 -- | Quick and dirty tokenizer. Leaves blank words like @Word ""@ so
--- those ought to be removed during parsing.
+-- those ought to be removed before parsing. See 'tokenize'.
 tok :: String -> [Tok]
 tok []       = []
 tok ('(':xs) = Open  : tok xs
@@ -48,6 +48,15 @@ tok (c  :xs) = tok' c xs [] where
 
 tokenize :: String -> [Tok]
 tokenize = filter (/= Word "") . tok
+
+{-|
+
+  A failing parser type, 'P'. Counts the tokens that were consumed for
+debugging purposes. Essentially it's something like @StateT [Tok]
+Maybe a@ with the extra "consumed tokens" state outside of the
+'Maybe'-induced failure mode.
+
+-}
 
 newtype P a = P { runP :: [Tok] -> Int -> (Maybe (a, [Tok]), Int) }
 
@@ -104,7 +113,7 @@ pParens inner = pOpen *> inner <* pClose
 oneOf :: [P a] -> P a
 oneOf = foldr (<|>) empty
 
--- | Parses just the first expression
+-- | Parses just the expression.
 e :: P Expr
 e = Fix <$> oneOf
   [ pParens sexpr                   -- nesting
@@ -130,8 +139,7 @@ sexpr = oneOf
   , p "pow"  *> (Pow  <$> e <*> e)
   ]
 
--- | Fast, memoizing factorial. Not even worth implementing this in
--- loops.
+-- | Fast, memoizing factorial.
 fact :: Double -> Double
 fact n = fromIntegral $ scanl (*) 1 [1..] !! (round n)
 
@@ -152,6 +160,18 @@ evalF (Fact e    )   = fact  (e)
 evalF (Log  e    )   = log   (e)
 evalF (Sqrt e    )   = sqrt  (e)
 evalF (Pow  e1 e2)   = e1 ** e2
+
+
+{-|
+
+  This calculator evaluates lisplike S-exprs (for simplicity in
+parsing). Thus, valid expressions might look like @(+ 1 2)@ or @(inv
+100)@. It handles division-by-zero by embedding IEEE 754 floats (as
+Haskell 'Double's) which include @NaN@ and both positive and negative
+@Infinity@. Unary @'-'@ can precede numbers so long as there isn't a
+space: @"-20"@ is ok but @"- 20"@ is likely a parse error.
+
+-}
 
 main :: IO ()
 main = forever $ do
