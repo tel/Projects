@@ -40,6 +40,30 @@ Numbers
 
 **Number Names** - Show how to spell out a number in English. You can use a preexisting implementation or roll your own, but you should support inputs up to at least one million (or the maximum value of your language's default bounded integer type, if that's less). *Optional: Support for inputs other than positive integers (like zero, negative integers, and floating-point numbers).*
 
+**Fair Rent Splitting** - http://www.fairandsquare.ie/?p=711
+
+**Airport Problem** - http://en.wikipedia.org/wiki/Airport_problem
+
+**Gaussian Elimination** - http://en.wikipedia.org/wiki/Gaussian_elimination
+
+**Fourier Motzkin** - http://en.wikipedia.org/wiki/Fourier-Motzkin_elimination
+
+**Simplex Method** - http://en.wikipedia.org/wiki/Simplex_algorithm
+
+**Hungarian Algorithm** - http://en.wikipedia.org/wiki/Hungarian_algorithm
+
+**Naive Bayes** - http://en.wikipedia.org/wiki/Naive_Bayes_classifier
+
+**Random Forest** - http://en.wikipedia.org/wiki/Random_forests
+
+**EM** - http://en.wikipedia.org/wiki/Expectation-maximization_algorithm
+
+**Backprop** - http://en.wikipedia.org/wiki/Back-propagation
+
+**DH Key Exchange** - http://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange
+
+**Quine-McCluskey Algorithm** - Minimization of boolean functions. http://en.wikipedia.org/wiki/Quine-McCluskey
+
 Graph
 --------
 **Graph from links** - Create a program that will create a graph or network from a series of links.
@@ -50,7 +74,11 @@ Graph
 
 **Dijkstra’s Algorithm** - Create a program that finds the shortest path through a graph using its edges.
 
+**Prim's Algorithm** - Minimum spanning trees. http://en.wikipedia.org/wiki/Prim%27s_algorithm
 
+**Ford-Fulkerson** - Maximum flow http://en.wikipedia.org/wiki/Ford-Fulkerson_algorithm
+
+**A\* Search** - http://en.wikipedia.org/wiki/A*_search_algorithm
 
 Text
 ---------
@@ -84,6 +112,8 @@ Text
 **Markdown to HTML Converter** - Converts Markdown formatted text into HTML files. Implement basic tags like `p`, `strong`, `em` etc. *Optional: Implement all tags from [Markdown Syntax Docs](daringfireball.net/projects/markdown/syntax).* 
 
 **Regex Query Tool** - A tool that allows the user to enter a text string and then in a separate control enter a regex pattern. It will run the regular expression against the source text and return any matches or flag errors in the regular expression.
+
+**Powerset construction** - http://en.wikipedia.org/wiki/Powerset_construction
 
 Networking
 ---------
